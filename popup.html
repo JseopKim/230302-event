@@ -60,7 +60,12 @@
     const popUp = document.getElementById('pop-up');
     const closeButton = popUp.children[0];
     const root = document.getElementById('root');
-    const makePtag = document.createElement('p');
+    // const makePtag = document.createElement('p');
+    function makePtag(parent) {
+      
+      document.createElement('p');
+      parent.appendChild()
+    }
     const makeSection = document.createElement('section');
     console.dir(popUp);
     console.dir(closeButton);
@@ -74,7 +79,7 @@
       for(let i = 0; i < root.children.length; i++) {
         root.children[i].style.backgroundColor = bgcolor[i];
       }
-    })
+    });
   </script>
 </body>
 </html>

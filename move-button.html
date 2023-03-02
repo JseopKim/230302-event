@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      overflow-x: hidden;
+    }
+    ul {
+      list-style-type: none;
+    }
+  </style>
+</head>
+<body>
+  <aside id="move-btn">
+
+  </aside>
+  <div id="root">
+
+  </div>
+
+  <script>
+    let move = document.getElementById('move-btn');
+    let root = document.getElementById('root');
+    
+    function makeDiv(tagName, parent) {
+      let tag = document.createElement(tagName);
+      parent.appendChild(tag);
+    }
+
+    function flexSet(target, disP, justifyC, alignI) {
+      target.style.display = disP;
+      target.style.justifyContent = justifyC;
+      target.style.alignItems = alignI;
+    }
+
+    function common(target) {
+      target.style.width = "100%";
+      target.style.height = "50px";
+      target.style.backgroundColor = "#fff";
+      target.style.border = "1px solid black";
+    }
+
+
+    //만들기 영역
+
+    //버튼 만들기
+    makeDiv('h1', move);
+    // main영역 만들기
+    makeDiv('main', root);
+    // first section 만들기
+    makeDiv('section', root.children[0]);
+    // first ul 만들기
+    makeDiv('ul', root.children[0].children[0]);
+    // li 만들기
+    for(let i = 0; i < 5; i++) {
+      makeDiv('li', root.children[0].children[0].children[0]);
+      root.children[0].children[0].children[0].children[i].innerHTML = "items-" + (i + 1);
+      common(root.children[0].children[0].children[0].children[i]);
+    }
+    // second section 만들기
+    makeDiv('section', root.children[0]);
+    
+    // second ul 만들기
+    makeDiv('ul', root.children[0].children[1]);
+
+    // button
+    move.style.width = "200px";
+    move.style.height = "200px";
+    move.style.backgroundColor = "#fff";
+    move.style.borderRadius = "50%";
+    move.style.position = "fixed";
+    move.style.bottom = "10px";
+    move.style.left = "50vw";
+    move.innerText = "Move!!";
+    flexSet(move, "flex", "center", "center");
+    
+
+    // root
+    root.style.width = "100vw";
+    root.style.height = "100vh";
+    root.style.backgroundColor = "cadetblue";
+    flexSet(root, "flex", "center", "center");
+
+    //main
+    let main = document.querySelector('#root > main');
+    main.style.width = "500px";
+    main.style.height = "500px";
+    main.style.border = "1px dotted black";
+    flexSet(main, "flex", "center", "center");
+
+    // first section
+    let firstSection = document.querySelector('#root > main > section:first-child');
+    document.querySelector('#root > main > section:first-child').id = "left-sect";
+    flexSet(firstSection, "flex", "center", "center");
+    firstSection.style.border = "1px solid black";
+
+
+    // first ul
+    let firstUl = document.querySelector('#root > main > section:first-child > ul');
+
+    
+    // second section
+    let secondSection = document.querySelector('#root > main > section:last-child');
+    document.querySelector('#root > main > section:last-child').id = "right-sect";
+    flexSet(secondSection, "flex", "center", "center");
+    secondSection.style.border = "1px solid blue";
+
+    // section 공통
+    for(let i = 0 ; i < 2; i++) {
+      root.children[0].children[i].style.width = "200px";
+      root.children[0].children[i].style.height = "450px";
+    }
+    
+
+  
+
+    // 섹션 공통에서 전체 섹션에 범위를 주는 부분이 잘 되지 않습니다. 부모와 자식을 나타내는 경로를 변수로 주는 것이 잘 되지 않았지만 먼저 만들고 나서 queryselector를 이용해서 만들 수 있었습니다. 마무리로 move! 영역을 눌렀을 때 items의 위치가 바뀌게끔 하는 것을 해보고 싶습니다.
+  </script>
+</body>
+</html>
